@@ -1,5 +1,5 @@
 CC = clang
-CFLAGS = -std=c11 -O0
+CFLAGS = -std=c99 -O0
 LDFLAGS =
 
 SRCS = $(wildcard src/*.c) $(wildcard src/**/*.c) $(wildcard src/**/**/*.c) $(wildcard src/**/**/**/*.c)

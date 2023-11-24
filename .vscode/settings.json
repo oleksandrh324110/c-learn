@@ -4,6 +4,7 @@
 		"*.mdx": "mdx",
 		"math.h": "c",
 		"stdio.h": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"ratio": "c"
 	}
 }
