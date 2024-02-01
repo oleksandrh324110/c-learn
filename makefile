@@ -1,5 +1,3 @@
-cc = gcc
-cflags = -std=c11 -Os -Wall
-
-%: src/%.c
-	$(cc) $(cflags) -o bin/$@.exe $<
+all:
+	gcc src/main.c -o bin/main.exe -std=c99
+	bin/main.exe

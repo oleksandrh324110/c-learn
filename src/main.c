@@ -1,45 +1,19 @@
-#include <math.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include <stdbool.h>
+#include <string.h>
 
-typedef int i32;
-typedef long long i64;
-typedef unsigned int u32;
-typedef unsigned long long u64;
-typedef float f32;
-typedef double f64;
+int main(int argc, const char** argv) {
+  if (argc < 2)
+    return 0;
 
-const u32 width = 120;
-const u32 height = 30;
-const f32 screen_aspect = (f32)width / height;
-const f32 character_aspect = (f32)9 / 20;
-const f32 aspect = screen_aspect * character_aspect;
+  char buff[3];
 
-int main() {
-  char buffer[width * height + 1];
-  buffer[width * height] = '\0';
+  strncpy(buff, argv[1], 3);
 
-  for (u64 t = 0;; t++) {
-    for (u32 i = 0; i < height; i++) {
-      for (u32 j = 0; j < width; j++) {
-        f32 x = ((f32)j / width * 2 - 1) * aspect;
-        f32 y = (f32)i / height * 2 - 1;
+  if (!strncmp(buff, "cat", 3))
+    printf("meow");
+  else if (!strncmp(buff, "dog", 3))
+    printf("Woof");
 
-        x += sin(t * 0.03) * 0.5 * aspect;
-        y += cos(t * 0.03) * 0.5;
-
-        char pixel = ' ';
-        if (pow(x, 2) + pow(y, 2) < 0.2) {
-          pixel = '@';
-        }
-
-        buffer[i * width + j] = pixel;
-      }
-    }
-
-    printf(buffer);
-
-    usleep(1000000 / 120);
-  }
+  return 0;
 }
