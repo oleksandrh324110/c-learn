@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"*.css": "css",
+		"*.mdx": "mdx",
+		"bit": "c",
+		"*.tcc": "c",
+		"cmath": "c",
+		"random": "c",
+		"math.h": "c",
+		"stdbool.h": "c",
+		"crtdefs.h": "c"
+	}
+}
