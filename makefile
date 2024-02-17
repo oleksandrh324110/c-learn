@@ -1,23 +1,36 @@
+OS := $(or $(OS), $(shell uname))
 
-CC = clang
-CFLAGS = -std=c99 -O0
-LDFLAGS =
+CFLAGS := -std=c11 -O3 -g -Wall -Wextra -Wpedantic
+CFLAGS +=
+LDFLAGS :=
 
-SRCS = $(wildcard src/*.c) $(wildcard src/**/*.c) $(wildcard src/**/**/*.c) $(wildcard src/**/**/**/*.c)
-OBJS  = $(SRCS:.c=.o)
+CMAKEFLAGS :=
+
+ifeq ($(OS), Windows_NT)
+	CC := gcc
+	CFLAGS +=
+	LDFLAGS +=
+	CMAKEFLAGS +=
+else ifeq ($(OS), Darwin)
+	CC := clang
+	CFLAGS +=
+	LDFLAGS +=
+endif
+
+SRC = $(wildcard src/*.c) $(wildcard src/**/*.c) $(wildcard src/**/**/*.c) $(wildcard src/**/**/**/*.c)
+OBJ = $(SRC:.c=.o)
+
+.PHONY: all clean
 
 all: compile link run
 
-compile: $(OBJS)
+compile: $(OBJ)
 
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 link:
-	$(CC) $(OBJS) -o bin/main $(LDFLAGS)
+	$(CC) $(OBJ) -o bin/main.exe $(LDFLAGS)
 
 run:
-	bin/main
-
-clean:
-	rm $(OBJS)
+	bin/main.exe
