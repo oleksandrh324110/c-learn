@@ -1,20 +1,14 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <math.h>
 
-bool isPrime(long long int n) {
-  for (long long int i = 2; i < sqrt(n) + 1; i++)
-    if (n % i == 0)
-      return false;
-  return true;
+int square(int eax) {
+  eax = eax * eax;
+  return eax;
 }
 
 int main(void) {
-  long long int n;
+  int eax = 0;
+  int ebx = square(eax);
 
-  while (scanf("%lld", &n) == 1) {
-    printf("%s\n", isPrime(n) ? "prime" : "not prime");
-  }
-
-  return 0;
+  return ebx;
 }
