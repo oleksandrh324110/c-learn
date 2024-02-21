@@ -6,13 +6,16 @@ LDFLAGS :=
 
 CMAKEFLAGS :=
 
-ifeq ($(OS), Windows_NT)
+ifeq ($(OS), Linux)
 	CC := gcc
 	CFLAGS +=
 	LDFLAGS +=
-	CMAKEFLAGS +=
 else ifeq ($(OS), Darwin)
 	CC := clang
+	CFLAGS +=
+	LDFLAGS +=
+else ifeq ($(OS), Windows)
+	CC := gcc
 	CFLAGS +=
 	LDFLAGS +=
 endif
