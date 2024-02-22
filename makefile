@@ -1,4 +1,9 @@
-OS := $(or $(OS), $(shell uname))
+default-target: all
+.PHONY: default-target
+
+ifndef target
+$(error target is NOT defined)
+endif
 
 CFLAGS := -std=c11 -O0 -g -Wall -Wextra -Wpedantic
 CFLAGS +=
@@ -6,24 +11,26 @@ LDFLAGS :=
 
 CMAKEFLAGS :=
 
-ifeq ($(OS), Linux)
+ifeq ($(target), linux)
 	CC := gcc
 	CFLAGS +=
 	LDFLAGS +=
-else ifeq ($(OS), Darwin)
+else ifeq ($(target), windows)
+	CC := gcc
+	CFLAGS +=
+	LDFLAGS +=
+else ifeq ($(target), darwin)
 	CC := clang
 	CFLAGS +=
 	LDFLAGS +=
-else ifeq ($(OS), Windows)
-	CC := gcc
+else ifeq ($(target), wsl)
+	CC := x86_64-w64-mingw32-gcc
 	CFLAGS +=
 	LDFLAGS +=
 endif
 
 SRC = $(wildcard src/*.c) $(wildcard src/**/*.c) $(wildcard src/**/**/*.c) $(wildcard src/**/**/**/*.c)
 OBJ = $(SRC:.c=.o)
-
-.PHONY: all clean
 
 all: compile link run
 
@@ -39,4 +46,7 @@ link:
 	$(CC) $(OBJ) -o bin/main.exe $(LDFLAGS)
 
 run:
-	bin/main.exe
+	./bin/main.exe
+
+clean:
+	rm $(OBJ)
