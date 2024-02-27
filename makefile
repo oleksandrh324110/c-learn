@@ -24,7 +24,7 @@ else ifeq ($(target), darwin)
 	CFLAGS +=
 	LDFLAGS +=
 else ifeq ($(target), wsl)
-	CC := x86_64-w64-mingw32-gcc
+	CC := gcc
 	CFLAGS +=
 	LDFLAGS +=
 endif
